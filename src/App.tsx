@@ -1,13 +1,43 @@
+import React, { useState } from 'react';
 // import styled, { keyframes } from 'styled-components';
 import GlobalStyles from './GlobalStyles';
-import Circle from './Circle';
+import { styled } from 'styled-components';
+// import Circle from './Circle';
+
+const Container = styled.div`
+  background-color: ${(props) => props.theme.bgColor};
+`;
+const H1 = styled.h1``;
 
 function App() {
+  const [userName, setuserName] = useState('');
+  const onchange = (event: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = event;
+    setuserName(value);
+  };
+  const onSubmit = (event: React.FocusEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('hello', userName);
+    setuserName('');
+  };
   return (
     <>
       <GlobalStyles />
-      <Circle borderColor="blue" bgColor={'tomato'} />
-      <Circle bgColor={'teal'} text="im here" />
+      {/* <Circle borderColor="blue" bgColor={'tomato'} />
+      <Circle bgColor={'teal'} text="im here" /> */}
+      <Container>
+        <form onSubmit={onSubmit}>
+          <input
+            value={userName}
+            onChange={onchange}
+            type="text"
+            placeholder="userName"
+          />
+          <button>Login</button>
+        </form>
+      </Container>
     </>
   );
 }
