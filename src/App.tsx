@@ -10,6 +10,31 @@ const Container = styled.div`
 const H1 = styled.h1``;
 
 function App() {
+  type TPlayer = {
+    name: string;
+    age?: number;
+  };
+
+  interface IPlayer {
+    readonly name: string;
+    age?: number;
+  }
+
+  const player: IPlayer = {
+    name: 'as',
+  };
+  function playerMaker(name: string): IPlayer {
+    return {
+      name,
+    };
+  }
+
+  const playerMake = (name: string): IPlayer => ({
+    name,
+  });
+  const nico = playerMaker('nico');
+  nico.age = 13;
+
   const [userName, setuserName] = useState('');
   const onchange = (event: React.FormEvent<HTMLInputElement>) => {
     const {
